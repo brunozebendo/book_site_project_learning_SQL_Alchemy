@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library</title>
+</head>
+<body>
+<h1>My Library</h1>
+<!--aqui a lógica para mostrar a mensagem abaixo se não houver nenhum livro adicionado ao dicionário-->
+    {% if books == []%}
+    <p>Library is empty.</p>
+    {%endif%}
+    <ul>
+        <!--abaixo, primeiro, foi criado um link para deletar o livro da base de dados e redirecionar para data base
+         Depois, a sintaxe do JINJA para rodar código Python no html. No caso, o código serve
+        para exibir todo livro que for inserido através da rota add. Depois, o href cria um link
+        que, quando clicado, leva para a rota de edição do nota do livro com base em seu id-->
+        {%for book in books%}
+        <li>
+            <a href="{{url_for('delete', id=book.id)}}">Delete</a>
+            {{book.title}} - {{book.author}} - {{book.rating}}/10
+        <a href="{{ url_for('edit', id=book.id)}}">Edit Rating</a>
+        </li>
+        {%endfor%}
+    </ul>
+    
+<a href="{{url_for('add')}}">Add New Book</a>
+</body>
+</html>
